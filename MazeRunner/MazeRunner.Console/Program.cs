@@ -18,11 +18,32 @@ internal class Program
             })
             .Build();
 
-        Console.WriteLine("Begin");
+        Console.Clear();
+        Console.WriteLine("Begin.");
         var apiService = host.Services.GetService<IApiService>();
         var game = new MazeRunnerGame(apiService!);
         Console.WriteLine(await game.CreateMazeAsync());
         Console.WriteLine(await game.CreateGameAsync());
+        Console.WriteLine("Finding solution, please wait, this process could take a long time...");
+        //TODO: Uncomment just to debug purposes
+        //var maze = await game.GetMazeAsync();
+        //if (maze != null)
+        //{
+        //    ShowMaze(maze);
+        //}
         Console.WriteLine(await game.RunGameAsync());
+        Console.WriteLine("End.");
+    }
+
+    private static void ShowMaze(int[,]? maze)
+    {
+        for (int i = 0; i < maze!.GetLength(0); i++)
+        {
+            for (int j = 0; j < maze.GetLength(1); j++)
+            {
+                Console.Write($"{maze[i, j]} ");
+            }
+            Console.WriteLine();
+        }
     }
 }
