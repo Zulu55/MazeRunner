@@ -21,7 +21,8 @@ internal class Program
         Console.WriteLine("Begin");
         var apiService = host.Services.GetService<IApiService>();
         var game = new MazeRunnerGame(apiService!);
-        var message = await game.StartAsync();
-        Console.WriteLine(message);
+        Console.WriteLine(await game.CreateMazeAsync());
+        Console.WriteLine(await game.CreateGameAsync());
+        Console.WriteLine(await game.RunGameAsync());
     }
 }
