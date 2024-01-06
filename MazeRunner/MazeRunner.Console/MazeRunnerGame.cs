@@ -126,7 +126,7 @@ namespace MazeRunner.Console
                     return $"{movements}\nThe maze has no solution\nGame over.";
                 }
 
-                movements += $"{movement} ({responseMovement.Result!.MazeBlockView.CoordX}, {responseMovement.Result!.MazeBlockView.CoordY})\n ";
+                movements += $"\n{movement} ({responseMovement.Result!.MazeBlockView.CoordX}, {responseMovement.Result!.MazeBlockView.CoordY})";
                 //TODO: Uncomment just to debug purposes
                 //var lastMovement = movements.Length > 80 ? movements.Substring(movements.Length - 80, 80) : movements;
                 _completed = responseMovement.Result!.Game.Completed;
