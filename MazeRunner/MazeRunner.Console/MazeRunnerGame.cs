@@ -77,19 +77,19 @@ namespace MazeRunner.Console
 
                 if (!response.Result.MazeBlockView.SouthBlocked)
                 {
-                        movement = Operations.GoSouth;
+                    movement = Operations.GoSouth;
                 }
                 else if (!response.Result.MazeBlockView.EastBlocked)
                 {
-                        movement = Operations.GoEast;
+                    movement = Operations.GoEast;
                 }
                 else if (!response.Result.MazeBlockView.WestBlocked)
-                { 
-                        movement = Operations.GoWest;
+                {
+                    movement = Operations.GoWest;
                 }
                 else
                 {
-                        movement = Operations.GoNorth;
+                    movement = Operations.GoNorth;
                 }
             }
 
