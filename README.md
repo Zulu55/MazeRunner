@@ -1,7 +1,7 @@
 # MazeRunner
 Solución de prueba técnica para Lendsum.
 
-Solo para efectos prácticos y que no se demore tanto coloque el laberinto de 10 x 10, para pdrobar con laberintos de 25 x 25 solo hay que cambiar el valor de **_mazeSize** en la clase **MazeRunnerGame**.
+Solo para efectos prácticos y que no se demore tanto coloque el laberinto de 10 x 10, para probar con laberintos de 25 x 25 solo hay que cambiar el valor de **_mazeSize** en la clase **MazeRunnerGame**.
 
 Prueba de ejecución correcta:
 
