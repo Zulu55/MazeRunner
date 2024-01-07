@@ -18,7 +18,7 @@ namespace MazeRunner.Console
         public MazeRunnerGame(IApiService apiService)
         {
             _apiService = apiService;
-            _mazeSize = 10;
+            _mazeSize = 25;
         }
 
         public async Task<string> CreateMazeAsync()
@@ -54,12 +54,16 @@ namespace MazeRunner.Console
             return $"Game {_gameUid} created.";
         }
 
-        public async Task<string> RunGameAsync()
+        public async Task<ActionResponse<string>> RunGameAsync()
         {
             var responseWhereIAm = await _apiService.GetAsync<TakeALookResponse>("/api", $"/Game/{_mazeUid}/{_gameUid}/");
             if (!responseWhereIAm.WasSuccess)
             {
-                return "Error getting the current position.";
+                return new ActionResponse<string>
+                {
+                    WasSuccess = false,
+                    Message = "Error getting the current position."
+                };
             }
 
             var movement = Operations.GoEast;
@@ -123,7 +127,11 @@ namespace MazeRunner.Console
 
                 if (count > 3)
                 {
-                    return $"{movements}\nThe maze has no solution\nGame over.";
+                    return new ActionResponse<string>
+                    {
+                        WasSuccess = false,
+                        Message = $"{movements}\nThe maze has no solution\nGame over."
+                    };
                 }
 
                 movements += $"\n{movement} ({responseMovement.Result!.MazeBlockView.CoordX}, {responseMovement.Result!.MazeBlockView.CoordY})";
@@ -141,10 +149,18 @@ namespace MazeRunner.Console
 
             if (_completed)
             {
-                return $"{movements}\nGame over.";
+                return new ActionResponse<string>
+                {
+                    WasSuccess = true,
+                    Message = $"{movements}\nGame over."
+                };
             }
 
-            return $"{movements}\nThe maze has no solution\nGame over.";
+            return new ActionResponse<string>
+            {
+                WasSuccess = false,
+                Message = $"{movements}\nThe maze has no solution\nGame over."
+            };
         }
 
         private Operations GetNextMovement(Mazeblockview mazeBlockView)

@@ -18,20 +18,27 @@ internal class Program
             })
             .Build();
 
-        Console.Clear();
-        Console.WriteLine("Begin.");
-        var apiService = host.Services.GetService<IApiService>();
-        var game = new MazeRunnerGame(apiService!);
-        Console.WriteLine(await game.CreateMazeAsync());
-        Console.WriteLine(await game.CreateGameAsync());
-        Console.WriteLine("Finding solution, please wait, this process could take a long time...");
-        //TODO: Uncomment just to debug purposes
-        //var maze = await game.GetMazeAsync();
-        //if (maze != null)
-        //{
-        //    ShowMaze(maze);
-        //}
-        Console.WriteLine(await game.RunGameAsync());
+        var hasSolution = false;
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("Begin.");
+            var apiService = host.Services.GetService<IApiService>();
+            var game = new MazeRunnerGame(apiService!);
+            Console.WriteLine(await game.CreateMazeAsync());
+            Console.WriteLine(await game.CreateGameAsync());
+            Console.WriteLine("Finding solution, please wait, this process could take a long time...");
+            //TODO: Uncomment just to debug purposes
+            //var maze = await game.GetMazeAsync();
+            //if (maze != null)
+            //{
+            //    ShowMaze(maze);
+            //}
+            var result = await game.RunGameAsync();
+            hasSolution = result.WasSuccess;
+            Console.WriteLine(result.Message);
+        } while (!hasSolution);
+
         Console.WriteLine("End.");
     }
 
