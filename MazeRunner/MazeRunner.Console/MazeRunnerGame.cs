@@ -18,7 +18,7 @@ namespace MazeRunner.Console
         public MazeRunnerGame(IApiService apiService)
         {
             _apiService = apiService;
-            _mazeSize = 25;
+            _mazeSize = 10;
         }
 
         public async Task<string> CreateMazeAsync()
